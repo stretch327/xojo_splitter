@@ -7,6 +7,7 @@ Splitter control for Xojo written in pure xojo code.
 3. In the splitter's Open event define the controls that come before and after the splitter:
 
 `Self.AddControlBefore(TextField1)`
+
 `Self.AddControlAfter(Listbox1)`
 
 You can also control how small controls are allowed to get either by setting:
@@ -16,6 +17,7 @@ You can also control how small controls are allowed to get either by setting:
 * Minimum sizes when you add a control to the splitter:
 
 `Self.AddControlBefore(TextField1, 200)`
+
 `Self.AddControlAfter(Listbox1, 300)`
 
 # Extras
