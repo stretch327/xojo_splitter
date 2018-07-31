@@ -134,7 +134,7 @@ End
 		  End If
 		  
 		  // On Windows 2018r1 and above have the controls refresh to make them resize smoothly
-		  #If TargetWindows And XojoVersion > 2017.04
+		  #If TargetWindows And RBVersion > 2017.04
 		    Self.Refresh
 		    For i = 0 To UBound(BeforeControls)
 		      BeforeControls(i).Refresh
