@@ -17,3 +17,13 @@ You can also control how small controls are allowed to get either by setting:
 
 `Self.AddControlBefore(TextField1, 200)`
 `Self.AddControlAfter(Listbox1, 300)`
+
+# Extras
+By default, the splitter has no drag image associated with it. If you want to have an indicator visible to show users where to drag, put the picture into the DragImage property. It will be automatically centered in the splitter. 
+
+Alternatively, you may wish to implement the Paint event on the your control instance for more complicated drawing needs.
+
+# Events
+As mentioned above, the Paint event will allow you to draw whatever you want within the bounds of the splitter.
+
+There is also a SplitterMoved event which fires whenever the splitter is moved by the user.
