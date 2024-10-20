@@ -6,6 +6,9 @@
 			Begin BuildStepList Mac OS X
 				Begin BuildProjectStep Build
 				End
+				Begin SignProjectStep Sign
+				  DeveloperID=
+				End
 			End
 			Begin BuildStepList Windows
 				Begin BuildProjectStep Build

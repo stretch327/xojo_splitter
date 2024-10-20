@@ -1,37 +1,36 @@
-#tag Window
-Begin ContainerControl Xojo_Splitter
-   AcceptFocus     =   False
-   AcceptTabs      =   False
-   AutoDeactivate  =   True
-   BackColor       =   &cFFFFFF00
+#tag DesktopWindow
+Begin DesktopContainer Xojo_Splitter
+   AllowAutoDeactivate=   True
+   AllowFocus      =   False
+   AllowFocusRing  =   False
+   AllowTabs       =   True
    Backdrop        =   0
-   Compatibility   =   ""
-   DoubleBuffer    =   False
+   BackgroundColor =   &cFFFFFF
+   Composited      =   False
    Enabled         =   True
-   EraseBackground =   True
-   HasBackColor    =   False
-   Height          =   100
-   HelpTag         =   ""
+   HasBackgroundColor=   False
+   Height          =   300
+   Index           =   -2147483648
    InitialParent   =   ""
-   Left            =   32
+   Left            =   0
    LockBottom      =   False
-   LockLeft        =   False
+   LockLeft        =   True
    LockRight       =   False
-   LockTop         =   False
+   LockTop         =   True
    TabIndex        =   0
    TabPanelIndex   =   0
    TabStop         =   True
-   Top             =   32
+   Tooltip         =   ""
+   Top             =   0
    Transparent     =   True
-   UseFocusRing    =   False
    Visible         =   True
-   Width           =   4
+   Width           =   300
 End
-#tag EndWindow
+#tag EndDesktopWindow
 
 #tag WindowCode
 	#tag Event
-		Function MouseDown(X As Integer, Y As Integer) As Boolean
+		Function MouseDown(x As Integer, y As Integer) As Boolean
 		  startx = x
 		  starty = y
 		  return true
@@ -39,7 +38,7 @@ End
 	#tag EndEvent
 
 	#tag Event
-		Sub MouseDrag(X As Integer, Y As Integer)
+		Sub MouseDrag(x As Integer, y As Integer)
 		  Dim dx, dy As Integer
 		  Dim i As Integer
 		  If Me.Width < Me.Height Then // Vertical
@@ -51,20 +50,10 @@ End
 		          Return
 		        End If
 		      Next i
-		      For i = 0 To UBound(BeforeContainers)
-		        If BeforeContainers(i).Width <= MinBefore Then 
-		          Return
-		        End If
-		      Next i
 		    ElseIf dx > 0 Then
 		      // If moving right, check the controls on the right
 		      For i = 0 To UBound(AfterControls)
 		        If AfterControls(i).Width <= MinAfter Then 
-		          Return
-		        End If
-		      Next i
-		      For i = 0 To UBound(AfterContainers)
-		        If AfterContainers(i).Width <= MinAfter Then 
 		          Return
 		        End If
 		      Next i
@@ -74,17 +63,12 @@ End
 		    For i = 0 To UBound(BeforeControls)
 		      BeforeControls(i).width = BeforeControls(i).width + dx
 		    Next i
-		    For i = 0 To UBound(BeforeContainers)
-		      BeforeContainers(i).width = BeforeContainers(i).width + dx
-		    Next i
+		    
 		    For i = 0 To UBound(AfterControls)
-		      AfterControls(i).left = AfterControls(i).left + dx
+		      AfterControls(i).Left = AfterControls(i).Left + dx
 		      AfterControls(i).width = AfterControls(i).width - dx
 		    Next i
-		    For i = 0 To UBound(AfterContainers)
-		      AfterContainers(i).left = AfterContainers(i).left + dx
-		      AfterContainers(i).width = AfterContainers(i).width - dx
-		    Next i
+		    
 		    Me.Left = Me.Left + dx
 		  ElseIf Me.Height < Me.Width Then // Horizontal
 		    dy = y - starty
@@ -96,11 +80,7 @@ End
 		          Return
 		        End If
 		      Next i
-		      For i = 0 To UBound(BeforeContainers)
-		        If BeforeContainers(i).height <= MinBefore Then 
-		          Return
-		        End If
-		      Next i
+		      
 		    ElseIf dy > 0 Then
 		      // if moving down, check the controls on the bottom
 		      For i = 0 To UBound(AfterControls)
@@ -108,45 +88,30 @@ End
 		          Return
 		        End If
 		      Next i
-		      For i = 0 To UBound(AfterContainers)
-		        If AfterContainers(i).height <= MinAfter Then 
-		          Return
-		        End If
-		      Next i
+		      
 		    End If
 		    
 		    // Move/Resize the controls
 		    For i = 0 To UBound(BeforeControls)
 		      BeforeControls(i).height = BeforeControls(i).height + dy
 		    Next i
-		    For i = 0 To UBound(BeforeContainers)
-		      BeforeContainers(i).height = BeforeContainers(i).height + dy
-		    Next i
+		    
 		    For i = 0 To UBound(AfterControls)
 		      AfterControls(i).top = AfterControls(i).top + dy
 		      AfterControls(i).height = AfterControls(i).height - dy
 		    Next i
-		    For i = 0 To UBound(AfterContainers)
-		      AfterContainers(i).top = AfterContainers(i).top + dy
-		      AfterContainers(i).height = AfterContainers(i).height - dy
-		    Next i
+		    
 		    Me.Top = Me.top + dy
 		  End If
 		  
-		  // On Windows 2018r1 and above have the controls refresh to make them resize smoothly
+		  // On Windows 2018r1 and later have the controls refresh to make them resize smoothly
 		  #If TargetWindows And RBVersion > 2017.04
 		    Self.Refresh
 		    For i = 0 To UBound(BeforeControls)
 		      BeforeControls(i).Refresh
 		    Next
-		    For i = 0 To UBound(BeforeContainers)
-		      BeforeContainers(i).Refresh
-		    Next
 		    For i = 0 To UBound(AfterControls)
 		      AfterControls(i).Refresh
-		    Next
-		    For i = 0 To UBound(AfterContainers)
-		      AfterContainers(i).Refresh
 		    Next
 		  #EndIf
 		  
@@ -156,10 +121,10 @@ End
 
 	#tag Event
 		Sub MouseEnter()
-		  if me.Width < me.Height then
-		    me.MouseCursor = system.Cursors.ArrowEastWest
-		  else
-		    me.MouseCursor = system.Cursors.ArrowNorthSouth
+		  If Me.Width < Me.Height Then
+		    Me.MouseCursor = System.Cursors.ArrowEastWest
+		  Else
+		    Me.MouseCursor = System.Cursors.ArrowNorthSouth
 		  end if
 		End Sub
 	#tag EndEvent
@@ -171,22 +136,18 @@ End
 	#tag EndEvent
 
 	#tag Event
-		Sub Paint(g As Graphics, areas() As REALbasic.Rect)
-		  DrawControl(g)
+		Sub Paint(g As Graphics, areas() As Rect)
+		  
 		End Sub
 	#tag EndEvent
 
 
 	#tag Method, Flags = &h0
-		Sub AddControlAfter(c as ContainerControl, minSize as integer = 0)
-		  AfterContainers.Append c
+		Sub AddControlAfter(c as Object, minSize as integer = 0)
+		  If Not CheckControlObject(c) Then
+		    Raise New UnsupportedOperationException("The passed item is not a control or a container")
+		  End If
 		  
-		  self.minAfter = max(self.minAfter, minSize)
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub AddControlAfter(c as RectControl, minSize as integer = 0)
 		  AfterControls.Append c
 		  
 		  self.minAfter = max(self.minAfter, minSize)
@@ -194,24 +155,41 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub AddControlBefore(c as ContainerControl, minSize as integer = 0)
-		  BeforeContainers.Append c
+		Sub AddControlBefore(c as Object, minSize as integer = 0)
+		  If Not CheckControlObject(c) Then
+		    Raise New UnsupportedOperationException("The passed item is not a control or a container")
+		  End If
 		  
-		  self.minBefore = max(self.minBefore, minSize)
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub AddControlBefore(c as RectControl, minSize as integer = 0)
 		  BeforeControls.Append c
 		  
-		  self.minBefore = max(self.minBefore, minSize)
+		  Self.minBefore = Max(Self.minBefore, minSize)
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
+		Private Function CheckControlObject(obj as object) As Boolean
+		  Select Case obj
+		  Case IsA RectControl
+		    Return True
+		    
+		  Case IsA ContainerControl
+		    Return True
+		    
+		  Case IsA DesktopUIControl
+		    Return True
+		    
+		  Case IsA DesktopContainer
+		    Return True
+		    
+		  End Select
+		  
+		  return False
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub DrawControl(gg as Graphics)
-		  dim p as Picture
+		  Dim p As Picture
 		  dim g as Graphics
 		  dim x,y as integer
 		  
@@ -219,11 +197,13 @@ End
 		  g = p.Graphics
 		  
 		  #if TargetMacOS then
-		    g.ForeColor = &cEDEDED
+		    g.ForeColor = ColorGroup.NamedColor("quaternaryLabelColor")
+		    g.ClearRect 0, 0, g.Width, g.Height
 		  #else
 		    g.ForeColor = FillColor
+		    g.FillRect 0,0,g.Width,g.Height
 		  #endif
-		  g.FillRect 0,0,g.Width,g.Height
+		  
 		  #if not TargetMacOS then
 		    if gg.Width>=gg.Height then
 		      gg.ForeColor = LightBevelColor
@@ -249,17 +229,9 @@ End
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h21
-		Private Sub GetSplitterPic()
-		  If DragImage = Nil Then
-		    
-		  End If
-		End Sub
-	#tag EndMethod
-
 
 	#tag Hook, Flags = &h0
-		Event Paint(g as Graphics)
+		Event Paint(g As Graphics)
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
@@ -268,19 +240,11 @@ End
 
 
 	#tag Property, Flags = &h21
-		Private AfterContainers() As ContainerControl
+		Private AfterControls() As MovableControl
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private AfterControls() As RectControl
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private BeforeContainers() As ContainerControl
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private BeforeControls() As RectControl
+		Private BeforeControls() As MovableControl
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -311,76 +275,97 @@ End
 		Name="Name"
 		Visible=true
 		Group="ID"
+		InitialValue=""
 		Type="String"
-		EditorType="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
+		InitialValue=""
 		Type="String"
-		EditorType="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Index"
+		Visible=true
+		Group="ID"
+		InitialValue="-2147483648"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Width"
+		Visible=true
+		Group="Size"
+		InitialValue="300"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Height"
+		Visible=true
+		Group="Size"
+		InitialValue="300"
+		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="InitialParent"
+		Visible=false
 		Group="Position"
+		InitialValue=""
 		Type="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Left"
 		Visible=true
 		Group="Position"
+		InitialValue="0"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Top"
 		Visible=true
 		Group="Position"
+		InitialValue="0"
 		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Width"
-		Visible=true
-		Group="Position"
-		InitialValue="300"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Height"
-		Visible=true
-		Group="Position"
-		InitialValue="300"
-		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockLeft"
 		Visible=true
 		Group="Position"
+		InitialValue="True"
 		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockTop"
 		Visible=true
 		Group="Position"
+		InitialValue="True"
 		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockRight"
 		Visible=true
 		Group="Position"
+		InitialValue="False"
 		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockBottom"
 		Visible=true
 		Group="Position"
+		InitialValue="False"
 		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="TabPanelIndex"
-		Group="Position"
-		InitialValue="0"
-		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="TabIndex"
@@ -388,21 +373,31 @@ End
 		Group="Position"
 		InitialValue="0"
 		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="TabPanelIndex"
+		Visible=false
+		Group="Position"
+		InitialValue="0"
+		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="TabStop"
+		Visible=true
 		Group="Position"
-		InitialValue="False"
+		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Visible"
+		Name="AllowAutoDeactivate"
 		Visible=true
 		Group="Appearance"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Enabled"
@@ -410,48 +405,71 @@ End
 		Group="Appearance"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="AutoDeactivate"
+		Name="Tooltip"
+		Visible=true
+		Group="Appearance"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="AllowFocusRing"
+		Visible=true
+		Group="Appearance"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Visible"
 		Visible=true
 		Group="Appearance"
 		InitialValue="True"
 		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="HelpTag"
-		Visible=true
-		Group="Appearance"
-		Type="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="UseFocusRing"
-		Visible=true
-		Group="Appearance"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="HasBackColor"
-		Visible=true
-		Group="Background"
-		InitialValue="False"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="BackColor"
+		Name="BackgroundColor"
 		Visible=true
 		Group="Background"
 		InitialValue="&hFFFFFF"
-		Type="Color"
+		Type="ColorGroup"
+		EditorType="ColorGroup"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Backdrop"
 		Visible=true
 		Group="Background"
+		InitialValue=""
 		Type="Picture"
-		EditorType="Picture"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasBackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="AllowFocus"
+		Visible=true
+		Group="Behavior"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="AllowTabs"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Transparent"
@@ -459,52 +477,38 @@ End
 		Group="Behavior"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="AcceptFocus"
-		Group="Behavior"
+		Name="Composited"
+		Visible=true
+		Group="Window Behavior"
+		InitialValue="False"
 		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="AcceptTabs"
-		Group="Behavior"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="EraseBackground"
-		Group="Behavior"
-		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="DragImage"
-		Visible=true
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="Picture"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinBefore"
-		Visible=true
-		Group="Behavior"
-		InitialValue="100"
-		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="MinAfter"
-		Visible=true
+		Visible=false
 		Group="Behavior"
 		InitialValue="100"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="DoubleBuffer"
-		Visible=true
-		Group="Windows Behavior"
-		InitialValue="False"
-		Type="Boolean"
-		EditorType="Boolean"
+		Name="MinBefore"
+		Visible=false
+		Group="Behavior"
+		InitialValue="100"
+		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

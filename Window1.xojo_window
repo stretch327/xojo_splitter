@@ -1,130 +1,70 @@
-#tag Window
-Begin Window Window1
-   BackColor       =   &cFFFFFF00
+#tag DesktopWindow
+Begin DesktopWindow Window1
    Backdrop        =   0
-   CloseButton     =   True
-   Compatibility   =   ""
+   BackgroundColor =   &cFFFFFF
    Composite       =   False
-   Frame           =   0
+   DefaultLocation =   2
    FullScreen      =   False
-   FullScreenButton=   False
-   HasBackColor    =   False
+   HasBackgroundColor=   False
+   HasCloseButton  =   True
+   HasFullScreenButton=   False
+   HasMaximizeButton=   True
+   HasMinimizeButton=   True
    Height          =   400
    ImplicitInstance=   True
-   LiveResize      =   True
    MacProcID       =   0
-   MaxHeight       =   32000
-   MaximizeButton  =   True
-   MaxWidth        =   32000
-   MenuBar         =   1017081855
-   MenuBarVisible  =   True
-   MinHeight       =   64
-   MinimizeButton  =   True
-   MinWidth        =   64
-   Placement       =   0
+   MaximumHeight   =   32000
+   MaximumWidth    =   32000
+   MenuBar         =   627793919
+   MenuBarVisible  =   False
+   MinimumHeight   =   64
+   MinimumWidth    =   64
    Resizeable      =   True
    Title           =   "Untitled"
+   Type            =   0
    Visible         =   True
    Width           =   600
-   Begin Xojo_Splitter Splitter1
-      AcceptFocus     =   False
-      AcceptTabs      =   False
-      AutoDeactivate  =   True
-      BackColor       =   &cFFFFFF00
-      Backdrop        =   0
-      DoubleBuffer    =   False
-      DragImage       =   0
-      Enabled         =   True
-      EraseBackground =   True
-      HasBackColor    =   False
-      Height          =   100
-      HelpTag         =   ""
-      Index           =   -2147483648
-      InitialParent   =   ""
-      Left            =   338
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      MinAfter        =   100
-      MinBefore       =   100
-      Scope           =   0
-      TabIndex        =   0
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Top             =   102
-      Transparent     =   True
-      UseFocusRing    =   False
-      Visible         =   True
-      Width           =   4
-   End
-   Begin Rectangle Rectangle1
-      AutoDeactivate  =   True
-      BorderWidth     =   1
-      BottomRightColor=   &c00000000
-      Enabled         =   True
-      FillColor       =   &cFFFFFF00
-      Height          =   100
-      HelpTag         =   ""
-      Index           =   -2147483648
-      InitialParent   =   ""
-      Left            =   343
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      Scope           =   2
-      TabIndex        =   1
-      TabPanelIndex   =   0
-      Top             =   102
-      TopLeftColor    =   &c00000000
-      Transparent     =   False
-      Visible         =   True
-      Width           =   231
-   End
-   Begin GroupBox GroupBox1
-      AutoDeactivate  =   True
+   Begin DesktopGroupBox GroupBox1
+      AllowAutoDeactivate=   True
       Bold            =   False
       Caption         =   "Untitled"
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   100
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   20
+      Left            =   40
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
       Scope           =   2
-      TabIndex        =   2
+      TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
-      Top             =   102
+      Tooltip         =   ""
+      Top             =   122
       Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   317
    End
-   Begin Label Label1
-      AutoDeactivate  =   True
+   Begin DesktopLabel Label1
+      AllowAutoDeactivate=   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   271
+      Left            =   291
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -133,30 +73,85 @@ Begin Window Window1
       Multiline       =   False
       Scope           =   2
       Selectable      =   False
-      TabIndex        =   3
+      TabIndex        =   1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Drag Here ↓"
-      TextAlign       =   0
+      TextAlignment   =   0
       TextColor       =   &c00000000
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
-      Top             =   70
+      Tooltip         =   ""
+      Top             =   90
       Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   100
    End
+   Begin DesktopRectangle Rectangle1
+      AllowAutoDeactivate=   True
+      BorderColor     =   &c000000
+      BorderThickness =   1.0
+      CornerSize      =   0.0
+      Enabled         =   True
+      FillColor       =   &cFFFFFF00
+      Height          =   100
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Left            =   363
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   2
+      TabIndex        =   2
+      TabPanelIndex   =   0
+      Tooltip         =   ""
+      Top             =   122
+      Transparent     =   False
+      Visible         =   True
+      Width           =   231
+   End
+   Begin Xojo_Splitter Splitter1
+      AllowAutoDeactivate=   True
+      AllowFocus      =   False
+      AllowFocusRing  =   False
+      AllowTabs       =   False
+      Backdrop        =   0
+      BackgroundColor =   &cFFFFFF00
+      Composited      =   False
+      DragImage       =   0
+      Enabled         =   True
+      HasBackgroundColor=   False
+      Height          =   100
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Left            =   358
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      MinAfter        =   100
+      MinBefore       =   100
+      Scope           =   0
+      TabIndex        =   3
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   122
+      Transparent     =   True
+      Visible         =   True
+      Width           =   4
+   End
 End
-#tag EndWindow
+#tag EndDesktopWindow
 
 #tag WindowCode
 #tag EndWindowCode
 
 #tag Events Splitter1
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  Me.AddControlBefore(GroupBox1)
 		  me.AddControlAfter(Rectangle1)
 		End Sub
@@ -167,22 +162,25 @@ End
 		Name="Name"
 		Visible=true
 		Group="ID"
+		InitialValue=""
 		Type="String"
-		EditorType="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Interfaces"
 		Visible=true
 		Group="ID"
+		InitialValue=""
 		Type="String"
-		EditorType="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
+		InitialValue=""
 		Type="String"
-		EditorType="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Width"
@@ -190,6 +188,7 @@ End
 		Group="Size"
 		InitialValue="600"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Height"
@@ -197,41 +196,46 @@ End
 		Group="Size"
 		InitialValue="400"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MinWidth"
+		Name="MinimumWidth"
 		Visible=true
 		Group="Size"
 		InitialValue="64"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MinHeight"
+		Name="MinimumHeight"
 		Visible=true
 		Group="Size"
 		InitialValue="64"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MaxWidth"
+		Name="MaximumWidth"
 		Visible=true
 		Group="Size"
 		InitialValue="32000"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MaxHeight"
+		Name="MaximumHeight"
 		Visible=true
 		Group="Size"
 		InitialValue="32000"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Frame"
+		Name="Type"
 		Visible=true
 		Group="Frame"
 		InitialValue="0"
-		Type="Integer"
+		Type="Types"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Document"
@@ -243,8 +247,7 @@ End
 			"6 - Rounded Window"
 			"7 - Global Floating Window"
 			"8 - Sheet Window"
-			"9 - Metal Window"
-			"11 - Modeless Dialog"
+			"9 - Modeless Dialog"
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -253,14 +256,39 @@ End
 		Group="Frame"
 		InitialValue="Untitled"
 		Type="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="CloseButton"
+		Name="HasCloseButton"
 		Visible=true
 		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasMaximizeButton"
+		Visible=true
+		Group="Frame"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasMinimizeButton"
+		Visible=true
+		Group="Frame"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasFullScreenButton"
+		Visible=true
+		Group="Frame"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Resizeable"
@@ -268,58 +296,38 @@ End
 		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MaximizeButton"
-		Visible=true
-		Group="Frame"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinimizeButton"
-		Visible=true
-		Group="Frame"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="FullScreenButton"
-		Visible=true
-		Group="Frame"
-		InitialValue="False"
-		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Composite"
+		Visible=false
 		Group="OS X (Carbon)"
 		InitialValue="False"
 		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="MacProcID"
+		Visible=false
 		Group="OS X (Carbon)"
 		InitialValue="0"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="ImplicitInstance"
+		Name="FullScreen"
 		Visible=true
 		Group="Behavior"
-		InitialValue="True"
+		InitialValue="False"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Placement"
+		Name="DefaultLocation"
 		Visible=true
 		Group="Behavior"
-		InitialValue="0"
-		Type="Integer"
+		InitialValue="2"
+		Type="Locations"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Default"
@@ -335,56 +343,54 @@ End
 		Group="Behavior"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="LiveResize"
-		Group="Behavior"
+		Name="ImplicitInstance"
+		Visible=true
+		Group="Window Behavior"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="FullScreen"
-		Group="Behavior"
-		InitialValue="False"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="HasBackColor"
+		Name="HasBackgroundColor"
 		Visible=true
 		Group="Background"
 		InitialValue="False"
 		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="BackColor"
+		Name="BackgroundColor"
 		Visible=true
 		Group="Background"
-		InitialValue="&hFFFFFF"
-		Type="Color"
+		InitialValue="&cFFFFFF"
+		Type="ColorGroup"
+		EditorType="ColorGroup"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Backdrop"
 		Visible=true
 		Group="Background"
+		InitialValue=""
 		Type="Picture"
-		EditorType="Picture"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="MenuBar"
 		Visible=true
 		Group="Menus"
-		Type="MenuBar"
-		EditorType="MenuBar"
+		InitialValue=""
+		Type="DesktopMenuBar"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="MenuBarVisible"
 		Visible=true
 		Group="Deprecated"
-		InitialValue="True"
+		InitialValue="False"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior
